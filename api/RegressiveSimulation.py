@@ -1,17 +1,15 @@
 from flask_restful import Resource
-from .core import requestRegressiveSimulation as request
+from .core import request
 import logging as logger
 
 
 class RegressiveSimulator(Resource):
-    def get(self, value_base):
+    def get(self, asset_id_base, asset_id_quote, value_base, time=False):
         logger.debug("Inside the get method of RegressiveSimulator")
-        return {
-            "message": request.RegressiveSimulation(
-                baseInvestiment=value_base)
-                # asset=f'{asset_id_base}/{asset_id_quote}',
-                # initialDate=time)
-                }, 200
+        response = request(asset=f'{asset_id_base}/{asset_id_quote}',
+                           baseInvestiment=value_base,
+                           initialDate=time)
+        return response, 200
 
     def post(self, asset_id_base, asset_id_quote, value_base, time=False):
         logger.debug("Inside the post method of RegressiveSimulation")

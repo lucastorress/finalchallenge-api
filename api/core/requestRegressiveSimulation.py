@@ -1,45 +1,46 @@
-import urllib3
+import requests
 import json
 
 PATH_EXCHANGE_RATE = 'https://rest.coinapi.io/v1/exchangerate'
 API_AUTH = 'D8521ADC-FBB3-4426-8F53-C24158590197'
 
-urllib3.disable_warnings()
-http = urllib3.PoolManager()
-
 
 def RegressiveSimulation(**kwargs):
     baseInvestiment = kwargs.get('baseInvestiment', 50)
-    initialDate = kwargs.get('initialDate', '2017-01-16T19:13:56-0300')
+    initialDate = kwargs.get('initialDate', False)
     _assetBase = kwargs.get('asset', 'BTC')
     assetBase = 'BTC' if _assetBase == 'BTC' else _assetBase.split('/')[0]
     _assetQuote = kwargs.get('asset', 'USD')
     assetQuote = 'USD' if _assetQuote == 'USD' else _assetBase.split('/')[1]
 
+    params = {
+        'apikey': API_AUTH
+    }
+
     if initialDate:
-        response = http.request(
-            'GET',
-            f'{PATH_EXCHANGE_RATE}/{assetBase}/{assetQuote}?time={initialDate}',
-            headers={
-                'X-CoinAPI-Key': API_AUTH
-            })
+        params['time'] = initialDate
+        response = requests.get(
+            f'{PATH_EXCHANGE_RATE}/{assetBase}/{assetQuote}',
+            params=params)
+
     # Caso não selecione data
     else:
-        response = http.request(
-            'GET',
+        response = requests.get(
             f'{PATH_EXCHANGE_RATE}/{assetBase}/{assetQuote}',
-            headers={
-                'X-CoinAPI-Key': API_AUTH
-            })
-    data = json.loads(response.data.decode('utf-8'))
+            params=params)
 
-    currentPrice = http.request(
-        'GET',
-        f'{PATH_EXCHANGE_RATE}/{assetBase}/{assetQuote}',
-        headers={
-            'X-CoinAPI-Key': API_AUTH
-        })
-    currentPrice = json.loads(currentPrice.data.decode('utf-8'))
+    response.encoding = 'utf-8'
+    data = response.json()
+
+    params = {
+        'apikey': API_AUTH
+    }
+
+    currentPrice = requests.get(
+            f'{PATH_EXCHANGE_RATE}/{assetBase}/{assetQuote}',
+            params=params)
+    currentPrice.encoding = 'utf-8'
+    currentPrice = currentPrice.json()
 
     # Cálculo da simulação
     pastPrice = float(data['rate'])
@@ -47,6 +48,8 @@ def RegressiveSimulation(**kwargs):
 
     gainPercentage = (currentPrice/pastPrice)
     gainPrice = (baseInvestiment*gainPercentage)
+    quantityCryptoPast = (baseInvestiment/pastPrice)
+    quantityCryptoToday = (baseInvestiment/currentPrice)
     gainPercentage = round((gainPercentage-1), 2)*100
 
     return {
@@ -55,7 +58,13 @@ def RegressiveSimulation(**kwargs):
         'pastPrice': pastPrice,
         'currentPrice': currentPrice,
         'baseInvestiment': baseInvestiment,
+        f'quantity{assetBase}_past': round(quantityCryptoPast, 8),
+        f'quantity{assetBase}_today': round(quantityCryptoToday, 8),
         'gainPercentage': gainPercentage,
-        'gainPrice': round(gainPrice-baseInvestiment, 2),
+        f'gainPrice{assetQuote}': round(gainPrice-baseInvestiment, 2),
         'total': round(gainPrice, 2)
     }
+
+
+if __name__ == "__main__":
+    print(RegressiveSimulation())
