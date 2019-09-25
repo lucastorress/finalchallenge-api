@@ -1,8 +1,12 @@
 import requests
 import json
 
+from api.controllers import requestQuoteCoins as conversion
+
 PATH_EXCHANGE_RATE = 'https://rest.coinapi.io/v1/exchangerate'
 API_AUTH = 'D8521ADC-FBB3-4426-8F53-C24158590197'
+
+quote_brl = conversion.USD_to_BRL()
 
 
 def RegressiveSimulation(**kwargs):
@@ -40,8 +44,8 @@ def RegressiveSimulation(**kwargs):
         }
 
     # Cálculo da simulação
-    buyPrice = float(data_initial['rate'])
-    sellPrice = float(data_final['rate'])
+    buyPrice = float(data_initial['rate'])*quote_brl
+    sellPrice = float(data_final['rate'])*quote_brl
 
     gainPercentage = (sellPrice/buyPrice)
     gainPrice = (baseInvestiment*gainPercentage)
@@ -51,7 +55,7 @@ def RegressiveSimulation(**kwargs):
 
     return {
         'market': f'{assetBase}/{assetQuote}',
-        'asset_convertion': 'BRL',
+        'asset_conversion': 'BRL',
         'buy_date': initialDate,
         'sell_date': finalDate,
         'buy_price': buyPrice,
@@ -66,4 +70,5 @@ def RegressiveSimulation(**kwargs):
 
 
 if __name__ == "__main__":
-    print(RegressiveSimulation(initialDate='2017-09-24T21:07:40-0300', finalDate='2018-01-01T18:08:13-0300'))
+    print(RegressiveSimulation(initialDate='2017-09-24T21:07:40-0300',
+                               finalDate='2018-01-01T18:08:13-0300'))

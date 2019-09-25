@@ -18,7 +18,7 @@ def Simulation(asset_id_base=None, asset_id_quote=None, value_base=None,
        or buy_date is None or sell_date is None:
         response = {
             'message': 'Fill in the fields correctly!'
-            }
+        }
         http_code = 400
     else:
         response = request_simulation(asset=f'{asset_id_base}/{asset_id_quote}',
