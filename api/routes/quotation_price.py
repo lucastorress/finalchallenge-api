@@ -10,4 +10,6 @@ response = request_quotation_price.RESPONSE
 @app.route('/api/v1/ranklist', methods=['GET'])
 def RankList():
     logger.debug("Inside the get method of RankList")
-    return jsonify(response), 200
+    return jsonify({
+        'ranklist': response
+    }), 200

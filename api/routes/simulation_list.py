@@ -12,4 +12,6 @@ def simulation_list():
     logger.debug("Inside the get method of Simulation List")
     http_code = 200
 
-    return jsonify(response), http_code
+    return jsonify({
+        'simulationlist': response
+    }), http_code
