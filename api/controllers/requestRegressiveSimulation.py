@@ -2,6 +2,7 @@ import requests
 import json
 
 from api.controllers import requestQuoteCoins as conversion
+# import requestQuoteCoins as conversion
 
 PATH_EXCHANGE_RATE = 'https://rest.coinapi.io/v1/exchangerate'
 API_AUTH = 'D8521ADC-FBB3-4426-8F53-C24158590197'
@@ -9,7 +10,7 @@ API_AUTH = 'D8521ADC-FBB3-4426-8F53-C24158590197'
 quote_brl = conversion.USD_to_BRL()
 
 
-def RegressiveSimulation(**kwargs):
+def simulation(**kwargs):
     baseInvestiment = kwargs.get('baseInvestiment', 50)
     initialDate = kwargs.get('initialDate', False)
     finalDate = kwargs.get('finalDate', False)
@@ -70,5 +71,5 @@ def RegressiveSimulation(**kwargs):
 
 
 if __name__ == "__main__":
-    print(RegressiveSimulation(initialDate='2017-09-24T21:07:40-0300',
-                               finalDate='2018-01-01T18:08:13-0300'))
+    print(simulation(initialDate='2017-09-24T21:07:40-0300',
+                     finalDate='2018-01-01T18:08:13-0300'))
