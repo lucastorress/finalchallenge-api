@@ -29,3 +29,99 @@ Acess the API by the http://localhost:5000/ and get this response:
     ]
 }
 ```
+
+## Sample response from the server
+URL: http://localhost:5000/api/v1/simulation/
+```json
+{
+    "message": "Fill in the fields correctly!",
+    "url": "/api/v1/simulation/<string:asset_id_base>/<int:value_base>/<string:buy_date>/<string:sell_date>"
+}
+```
+
+## Simulation endpoint
+URL: http://localhost:5000/api/v1/simulation/BTC/5000/2017-09-01T12:00:00-0300/2018-09-01T12:00:00-0300
+
+The default for buy_date and sell_date is ISO 8601.
+```json
+{
+    "asset_conversion": "BRL",
+    "base_investiment_cripto": 0.25101567,
+    "base_investiment_fiat": 5000,
+    "buy_date": "2017-09-01T12:00:00-0300",
+    "buy_price": 19919.075014017188,
+    "fiat_total": 7406.71,
+    "market": "BTC/USD",
+    "profit_fiat_price": 2406.71,
+    "profit_percentage": 48,
+    "quantity_cripto_if_buy_today": 0.16945152,
+    "sell_date": "2018-09-01T12:00:00-0300",
+    "sell_price": 29506.964050068644
+}
+```
+
+## List of coins available for simulation endpoint
+URL: http://localhost:5000/api/v1/simulationlist/
+```json
+{
+    "simulationlist": [
+        {
+            "id": 1,
+            "name": "Bitcoin",
+            "symbol": "BTC"
+        },
+        ...
+    ]
+}
+```
+
+## List of top coins
+URL: http://localhost:5000/api/v1/ranklist
+```json
+{
+    "ranklist": [
+        {
+            "circulating_supply": 17955700,
+            "description": "Bitcoin (BTC) is a consensus network that enables a new payment system and a completely digital currency. Powered by its users, it is a peer to peer payment network that requires no central authority to operate. On October 31st, 2008, an individual or group of individuals operating under the pseudonym \"Satoshi Nakamoto\" published the Bitcoin Whitepaper and described it as: \"a purely peer-to-peer version of electronic cash, which would allow online payments to be sent directly from one party to another without going through a financial institution.\"",
+            "id": 1,
+            "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png",
+            "market_cap": 638994363579.9025,
+            "max_supply": 21000000,
+            "name": "Bitcoin",
+            "percent_change_1h": -1.06203079,
+            "percent_change_24h": -12.45245236,
+            "percent_change_7d": -14.83869769,
+            "price": 35587.27109385334,
+            "rank": 1,
+            "slug": "bitcoin",
+            "symbol": "BTC",
+            "total_supply": 17955700,
+            "volume_24h": 111453186207.8012
+        },
+        ...
+    ]
+}
+```
+
+## List of latest news in portuguese language
+URL: http://localhost:5000/api/v1/latestnews
+
+You can change the language on configuration.
+```json
+{
+    "latestnews": [
+        {
+            "date": "2019-09-26T13:13:07.000Z",
+            "description": "Os deputados federal aprovaram na quarta-feira (25) — em meio aos questionamentos ao CEO da Atlas Quantum — a audiência pública solicitada pela deputada federal Margarida Salomão (PT/MG). O objetivo é debater a regulamentação das criptomoedas e da tecnologia Blockchain. No dia anterior, a política…",
+            "id": 1,
+            "image_article": "https://portaldobitcoin.com/wp-content/uploads/2019/09/margarida-salomao2.png",
+            "source": {
+            "favicon": "https://assets.cryptocontrol.io/favicons/5bd00c580c38a7001921bdb2.png"
+            },
+            "title": "Comissão da Câmara para regular criptomoedas aprova audiência de deputada petista",
+            "url": "https://cryptocontrol.io/r/api/article/5d8cbdef03f7410018856adf?ref=5d8a4524783fbd00182397db"
+        },
+        ...
+    ]
+}
+```
