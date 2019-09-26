@@ -15,6 +15,7 @@ def index():
             '/api/v1/simulation/',
             '/api/v1/simulationlist/',
             '/api/v1/ranklist',
+            '/api/v1/latestnews',
         ]
         }
     return jsonify(response), 200
