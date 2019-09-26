@@ -30,7 +30,7 @@ Acess the API by the http://localhost:5000/ and get this response:
 }
 ```
 
-## Sample response from the server
+## Simulation endpoint with errors
 URL: http://localhost:5000/api/v1/simulation/
 ```json
 {
@@ -60,7 +60,7 @@ The default for buy_date and sell_date is ISO 8601.
 }
 ```
 
-## List of coins available for simulation endpoint
+## List of coins available for simulation
 URL: http://localhost:5000/api/v1/simulationlist/
 ```json
 {
