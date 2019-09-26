@@ -9,7 +9,7 @@ from api.controllers import requestRegressiveSimulation as request_simulation
 @app.route(
     '/api/v1/simulation/<string:asset_id_base>/<int:value_base>/<string:buy_date>/<string:sell_date>',
     methods=['GET'])
-def Simulation(asset_id_base=None, value_base=None,
+def simulation(asset_id_base=None, value_base=None,
                buy_date=None, sell_date=None):
 
     logger.debug("Inside the get method of Simulation")
