@@ -2,7 +2,9 @@ import requests
 import json
 
 from api.controllers import requestQuoteCoins as conversion
+from api.controllers.helpers import convertDate as conversion_date
 # import requestQuoteCoins as conversion
+# import helpers.convertDate as conversion_date
 
 PATH_EXCHANGE_RATE = 'https://rest.coinapi.io/v1/exchangerate'
 API_AUTH = 'D8521ADC-FBB3-4426-8F53-C24158590197'
@@ -57,8 +59,8 @@ def simulation(**kwargs):
     return {
         'market': f'{assetBase}/{assetQuote}',
         'asset_conversion': 'BRL',
-        'buy_date': initialDate,
-        'sell_date': finalDate,
+        'buy_date': conversion_date.convert_ISO8601_to_normal(initialDate),
+        'sell_date': conversion_date.convert_ISO8601_to_normal(finalDate),
         'buy_price': buyPrice,
         'sell_price': sellPrice,
         'base_investiment_fiat': baseInvestiment,
@@ -71,5 +73,5 @@ def simulation(**kwargs):
 
 
 if __name__ == "__main__":
-    print(simulation(initialDate='2017-09-24T21:07:40-0300',
-                     finalDate='2018-01-01T18:08:13-0300'))
+    print(simulation(initialDate='2017-09-24T12:00:00-03:00',
+                     finalDate='2018-01-01T12:00:00-03:00'))
