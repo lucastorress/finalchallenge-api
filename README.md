@@ -31,7 +31,7 @@ Acess the API by the http://localhost:5000/ and get this response:
 ```
 
 ## Simulation endpoint with errors
-URL: http://localhost:5000/api/v1/simulation/
+URL (GET only): http://localhost:5000/api/v1/simulation/
 ```json
 {
     "message": "Fill in the fields correctly!",
@@ -40,28 +40,28 @@ URL: http://localhost:5000/api/v1/simulation/
 ```
 
 ## Simulation endpoint
-URL: http://localhost:5000/api/v1/simulation/BTC/5000/2017-09-01T12:00:00-0300/2018-09-01T12:00:00-0300
+URL (GET only): http://localhost:5000/api/v1/simulation/BTC/5000/2017-09-01T12:00:00-0300/2018-09-01T12:00:00-0300
 
 The default for buy_date and sell_date is ISO 8601.
 ```json
 {
     "asset_conversion": "BRL",
-    "base_investiment_cripto": 0.25101567,
+    "base_investiment_cripto": 0.3278419,
     "base_investiment_fiat": 5000,
-    "buy_date": "2017-09-01T12:00:00-0300",
-    "buy_price": 19919.075014017188,
-    "fiat_total": 7406.71,
+    "buy_date": "24/09/2017",
+    "buy_price": 15251.253758351237,
+    "fiat_total": 8942.6,
     "market": "BTC/USD",
-    "profit_fiat_price": 2406.71,
-    "profit_percentage": 48,
-    "quantity_cripto_if_buy_today": 0.16945152,
-    "sell_date": "2018-09-01T12:00:00-0300",
-    "sell_price": 29506.964050068644
+    "profit_fiat_price": 3942.6,
+    "profit_percentage": 79,
+    "quantity_cripto_if_buy_today": 0.18330342,
+    "sell_date": "24/09/2018",
+    "sell_price": 27277.178136477036
 }
 ```
 
 ## List of coins available for simulation
-URL: http://localhost:5000/api/v1/simulationlist/
+URL (GET only): http://localhost:5000/api/v1/simulationlist/
 ```json
 {
     "simulationlist": [
@@ -76,7 +76,7 @@ URL: http://localhost:5000/api/v1/simulationlist/
 ```
 
 ## List of top coins
-URL: http://localhost:5000/api/v1/ranklist
+URL (GET only): http://localhost:5000/api/v1/ranklist
 ```json
 {
     "ranklist": [
@@ -104,7 +104,7 @@ URL: http://localhost:5000/api/v1/ranklist
 ```
 
 ## List of latest news in portuguese language
-URL: http://localhost:5000/api/v1/latestnews
+URL (GET only): http://localhost:5000/api/v1/latestnews
 
 You can change the language on configuration.
 ```json
