@@ -12,10 +12,7 @@ def USD_to_BRL(debug=False):
     if debug:
         return data
 
-    brl = data['USD']['ask']
-    index = brl.find(',')
-    brl = brl[:index] + '.' + brl[index+1:]
-    brl = float(brl)
+    brl = float(data['USD']['ask'])
     return float(round(brl, 2))
 
 if __name__ == "__main__":
