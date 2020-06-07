@@ -1,7 +1,7 @@
 Apple Foundation - FinalChallenge API
 =========================
 
-Python API developed using Flask framework during process of Apple Foundation's class. Our team is composed by Raji, Albert and Lucas Torres. This API is used by mobile application developed in Swift and it's like a middleware.
+Python API developed using Flask framework during process of Apple Foundation's class. Our team was composed by Raji, Albert and Lucas Torres. This API is used by mobile application developed in Swift and it's like a middleware.
 
 ## Installation
 ```sh
@@ -125,3 +125,8 @@ You can change the language on configuration.
     ]
 }
 ```
+
+## Contributors
+[Raji Navarro](https://github.com/rajinavarro)</br>
+[Lucas Torres](https://github.com/lucastorress)</br>
+[Albert Queiroz](https://github.com/AlbertQueiroz)
